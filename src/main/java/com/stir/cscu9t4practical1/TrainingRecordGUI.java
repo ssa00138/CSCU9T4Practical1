@@ -27,6 +27,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JLabel labdist = new JLabel(" Distance (km):");
     private JButton addR = new JButton("Add");
     private JButton lookUpByDate = new JButton("Look Up");
+    private JButton FindAllByDate = new JButton ("Find All Entry");
+    private JButton RemoveByNameandData = new JButton ("Remove");
 
     private TrainingRecord myAthletes = new TrainingRecord();
 
@@ -68,6 +70,10 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         addR.addActionListener(this);
         add(lookUpByDate);
         lookUpByDate.addActionListener(this);
+        add (FindAllByDate);
+        FindAllByDate.addActionListener(this);
+        add (RemoveByNameandData);
+        RemoveByNameandData.addActionListener(this);
         add(outputArea);
         outputArea.setEditable(false);
         setSize(720, 200);
@@ -88,11 +94,23 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         if (event.getSource() == lookUpByDate) {
             message = lookupEntry();
         }
+        if (event.getSource() == FindAllByDate) {
+        	message = FindAllEntry();
+        }
+        if (event.getSource() == RemoveByNameandData) {
+        	message = FindAllEntry();
+        	
+        }
         outputArea.setText(message);
         blankDisplay();
     } // actionPerformed
 
-    public String addEntry(String what) {
+    private String FindAllEntry() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String addEntry(String what) {
         String message = "Record added\n";
         System.out.println("Adding "+what+" entry to the records");
         String n = name.getText();
@@ -116,6 +134,14 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         outputArea.setText("looking up record ...");
         String message = myAthletes.lookupEntry(d, m, y);
         return message;
+    }
+    public String FindAllEntry1 () {
+    	int m = Integer.parseInt(month.getText ());
+    	int d = Integer.parseInt (day.getText());
+    	int y = Integer.parseInt (year.getText());
+    	outputArea.setText ("Finding all records...");
+    	String message = myAthletes.FindAllEntry(d, m, y);
+    	return message;
     }
 
     public void blankDisplay() {
